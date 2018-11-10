@@ -1,13 +1,23 @@
 from flask import Flask, render_template,request
-app =  Flask(_name_)
-@app.route('/hello/')
-@app.route('/hello/<name>')
-def pajamas(name=None):
-    return render_template('hello.html',name=name)
+app =  Flask(__name__)
 
 @app.route('/')
 def hello_world():
-    return 'Hello, World!'
+    return render_template('index.html')
 
-if _name_ == '_main_' :
+
+@app.route('/submit', methods=['POST'])
+def submit():
+    topic = request.form['topic']
+    if 'myFile' in request.files:
+        print("File is in there! yo..")
+        myFile = request.files['myFile']
+
+    else:
+        myFile = None
+
+    return topic
+
+if __name__ == '__main__' :
     app.run()
+                               
