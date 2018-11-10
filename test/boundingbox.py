@@ -1,9 +1,13 @@
 import cv2
+import imutils
 
 img = cv2.imread('0.jpg')
 
+img = imutils.resize(img, width=800)
+imgW, imgH = img.shape[0], img.shape[1]
+
 imgray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
-#imgray = cv2.GaussianBlur(imgray,(5,5),0)
+imgray = cv2.GaussianBlur(imgray,(7,7),0)
 #imgray = cv2.medianBlur(imgray,3)
 
 #ret,thresh = cv2.threshold(imgray,127,255,0)
@@ -17,15 +21,14 @@ contours = sorted(contours, key = cv2.contourArea, reverse = True)[:5]
 for cnt in contours:
 	peri = cv2.arcLength(cnt, True)
 	approx = cv2.approxPolyDP(cnt, 0.2 * peri, True)
-	
-	#if len(approx) > 3:
-	#print cv2.contourArea(cnt)
-	#cv2.drawContours(img, cnt, -1, (0,255,0), 3)
-	#cv2.imshow('test',img)
-	#cv2.waitKey(0)
+	area = cv2.contourArea(cnt)
 
 	x,y,w,h = cv2.boundingRect(cnt)
-	cv2.rectangle(img,(x,y),(x+w,y+h),(0,255,0),2)
+
+	areaDiff = (imgW*imgH - (w-x)*(h-y))	
+	
+	if areaDiff > 0.01:
+		cv2.rectangle(img,(x,y),(x+w,y+h),(0,255,0),2)
 	
 #cv2.drawContours(img, contours, -1, (0,255,0), 3)
 cv2.imshow('test',img)
