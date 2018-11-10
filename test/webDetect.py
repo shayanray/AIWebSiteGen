@@ -3,9 +3,11 @@ import imutils
 
 bInd = 15
 
-img = cv2.imread('0.jpg')
+img = cv2.imread('1.jpg')
 
-img = imutils.resize(img, width=800)
+img = imutils.resize(img, width=1400)
+origImg = img.copy()
+
 imgW, imgH = img.shape[0], img.shape[1]
 
 imgray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
@@ -17,23 +19,25 @@ imgray = cv2.GaussianBlur(imgray,(7,7),0)
 thresh = cv2.adaptiveThreshold(imgray,255,cv2.ADAPTIVE_THRESH_GAUSSIAN_C,cv2.THRESH_BINARY,11,2)
 im2, contours, hierarchy = cv2.findContours(thresh,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
 
-contours = sorted(contours, key = cv2.contourArea, reverse = True)[:5]
+contours = sorted(contours, key = cv2.contourArea, reverse = True)[:15]
 
 for cnt in contours:
-	peri = cv2.arcLength(cnt, True)
-	approx = cv2.approxPolyDP(cnt, 0.2 * peri, True)
 	area = cv2.contourArea(cnt)
 
 	x,y,w,h = cv2.boundingRect(cnt)
 
-	areaDiff = (imgW*imgH - (w-x)*(h-y))	
+	areaDiff = abs(imgW*imgH - (w-x)*(h-y))	
 	
 	if areaDiff > 0.01:
 		cv2.rectangle(img,(x-bInd,y-bInd),(x+w+bInd,y+h+bInd),(0,255,0),2)
-	cv2.imshow('test',img[y-bInd:y+h+bInd, x-bInd:x+w+bInd])
+	cv2.imshow('test',origImg[y-bInd:y+h+bInd, x-bInd:x+w+bInd])
+	cv2.imwrite('0.png',origImg[y-bInd:y+h+bInd, x-bInd:x+w+bInd])
 	cv2.waitKey(0)
-	
-#cv2.drawContours(img, contours, -1, (0,255,0), 3)
+'''	
+drawnCnt = origImg.copy()
+cv2.drawContours(drawnCnt, contours, -1, (0,255,0), 3)
+cv2.imshow('cnt',drawnCnt)
+'''
 cv2.imshow('s',thresh)
 cv2.imshow('test',img)
 cv2.waitKey(0)
