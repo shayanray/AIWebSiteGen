@@ -81,6 +81,7 @@ for cnt in contours:
 	print '\n\n\n\n'
 	elementList.append((element, pos))
 
+print elementList
 
 cv2.imshow('s',thresh)
 cv2.imshow('test',img)
