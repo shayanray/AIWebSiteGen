@@ -1,0 +1,59 @@
+{
+	"content":{
+
+		"title": {
+
+		},
+
+		"summary": {
+
+		},
+
+		"images" : [],
+
+		"ref-urls": [],
+
+		"embedded-video": {
+
+		},
+
+
+
+	},
+	"position": {
+		"navbar": {
+      		"margin-bottom": "0",
+      		"border-radius": "0"
+    	},
+
+    	"rowcontent": {
+    		"height": "450px"
+    	},
+
+		"sidenav": {
+			"padding-top:" : "20px",
+			"background-color": "#f1f1f1",
+			"height": "100%";
+		},
+		"footer" {
+      		"background-color": "#555",
+      		"color": "white",
+      		"padding": "15px"
+    	},
+
+    	
+
+
+		"header": "center",
+
+		"summary": "center",
+
+		"images" : "right-pane",
+
+		"ref-urls": [],
+
+		"embedded-video": {
+
+		}
+	}
+}
