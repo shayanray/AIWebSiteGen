@@ -25,7 +25,7 @@ for i in data["query"]["pages"]:
 
 print("Source links")
 for link in data["query"]["pages"][id]["extlinks"]:
-	print link
+	print "http:" + str(link)[9:len(str(link))-2]
 print('\n\n\n\n\n')
 print('Summary')
 print wikipedia.summary(title)
