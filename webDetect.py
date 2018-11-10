@@ -86,4 +86,4 @@ print elementList
 cv2.imshow('s',thresh)
 cv2.imshow('test',img)
 cv2.waitKey(0)
-
+return elementList
