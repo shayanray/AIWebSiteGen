@@ -8,7 +8,8 @@ print ("Image Links")
 page = wikipedia.page(name)
 
 for x in page.images:
-	print(x)
+	if "commons" in x and ".svg" not in x:
+		print(x)
 
 print("\n\n\n\n\n")
 
