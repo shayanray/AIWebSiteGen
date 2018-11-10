@@ -18,12 +18,15 @@ def insideExistingBox(cnt):
 	return False
 
 def main():
+	#imgPath = 'web0.jpg'	
+	imgPath = 'web1.jpg'	
+
 	#img = cv2.imread('1.jpg')
 	#img = cv2.imread('2.jpg')
 	#origImg = cv2.imread('test/web0.jpg')
-	img = cv2.imread('web0.jpg',0)
+	img = cv2.imread(imgPath,0)
 	img = imutils.resize(img, width=1400)
-	resImg = cv2.imread('web0.jpg')
+	resImg = cv2.imread(imgPath)
 	resImg = imutils.resize(resImg, width=1400)
 	origImg = img.copy()
 
