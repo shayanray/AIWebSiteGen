@@ -38,7 +38,7 @@ im2, contours, hierarchy = cv2.findContours(thresh,cv2.RETR_TREE,cv2.CHAIN_APPRO
 
 contours = sorted(contours, key = cv2.contourArea, reverse = True)[:20]
 
-
+elementList = []
 for cnt in contours:
 	area = cv2.contourArea(cnt)
 	x,y,w,h = cv2.boundingRect(cnt)
@@ -55,7 +55,8 @@ for cnt in contours:
 	
 	if areaDiff > 0.01:
 		cv2.rectangle(img,(x-bInd,y-bInd),(x+w+bInd,y+h+bInd),(0,255,0),2)
-	print ie.getElement(origImg[y-bInd:y+h+bInd, x-bInd:x+w+bInd])
+	element = ie.getElement(origImg[y-bInd:y+h+bInd, x-bInd:x+w+bInd])
+	print element
 
 	pos = None	
 	if h < imgH/4 and y < imgH/4:
@@ -78,6 +79,8 @@ for cnt in contours:
 	cv2.waitKey(0)
 
 	print '\n\n\n\n'
+	elementList.append((element, pos))
+
 
 cv2.imshow('s',thresh)
 cv2.imshow('test',img)
