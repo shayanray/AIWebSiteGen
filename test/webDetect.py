@@ -34,6 +34,7 @@ for cnt in contours:
 	
 	if areaDiff > 0.01:
 		cv2.rectangle(img,(x-bInd,y-bInd),(x+w+bInd,y+h+bInd),(0,255,0),2)
+		cv2.drawContours(img, contours, 1, (0,255,0), 3)
 	cv2.imshow('test',origImg[y-bInd:y+h+bInd, x-bInd:x+w+bInd])
 	cv2.imwrite('0.png',origImg[y-bInd:y+h+bInd, x-bInd:x+w+bInd])
 	cv2.waitKey(0)

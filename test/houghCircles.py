@@ -1,7 +1,7 @@
 import numpy as np
 import cv2 as cv
 img = cv.imread('shapes/circle.png',0)
-img = cv.imread('shapes/1.jpg',0)
+#img = cv.imread('shapes/1.jpg',0)
 img = cv.medianBlur(img,5)
 cimg = cv.cvtColor(img,cv.COLOR_GRAY2BGR)
 circles = cv.HoughCircles(img,cv.HOUGH_GRADIENT,1,20,
