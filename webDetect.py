@@ -20,13 +20,17 @@ def insideExistingBox(cnt):
 def main():
 	#img = cv2.imread('1.jpg')
 	#img = cv2.imread('2.jpg')
-	img = cv2.imread('test/web0.jpg')
+	#origImg = cv2.imread('test/web0.jpg')
+	img = cv2.imread('test/web0.jpg',0)
 	img = imutils.resize(img, width=1400)
+	resImg = cv2.imread('test/web0.jpg')
+	resImg = imutils.resize(resImg, width=1400)
 	origImg = img.copy()
 
 	imgH, imgW = img.shape[0], img.shape[1]
 
-	imgray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
+	imgray = img
+	#imgray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
 
 	imgray = cv2.GaussianBlur(imgray,(9,9),0)
 	#imgray = cv2.medianBlur(imgray,3)
@@ -54,7 +58,7 @@ def main():
 		areaDiff = abs(imgW*imgH - (w-x)*(h-y))	
 		
 		if areaDiff > 0.01:
-			cv2.rectangle(img,(x-bInd,y-bInd),(x+w+bInd,y+h+bInd),(0,255,0),2)
+			cv2.rectangle(resImg,(x-bInd,y-bInd),(x+w+bInd,y+h+bInd),(0,255,0),2)
 		element = ie.getElement(origImg[y-bInd:y+h+bInd, x-bInd:x+w+bInd])
 		print element
 
@@ -84,7 +88,7 @@ def main():
 	print elementList
 
 	cv2.imshow('s',thresh)
-	cv2.imshow('test',img)
+	cv2.imshow('test',resImg)
 	cv2.waitKey(0)
 	return elementList
 
