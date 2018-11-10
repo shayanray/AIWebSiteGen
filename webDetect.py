@@ -1,8 +1,11 @@
 import cv2
 import imutils
+import identifyElement as ie
 
 bInd = 15
 
+#img = cv2.imread('1.jpg')
+#img = cv2.imread('2.jpg')
 img = cv2.imread('test/web0.jpg')
 
 cntList = []
@@ -24,7 +27,8 @@ origImg = img.copy()
 imgH, imgW = img.shape[0], img.shape[1]
 
 imgray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
-imgray = cv2.GaussianBlur(imgray,(5,5),0)
+
+imgray = cv2.GaussianBlur(imgray,(9,9),0)
 #imgray = cv2.medianBlur(imgray,3)
 
 #ret,thresh = cv2.threshold(imgray,127,255,0)
@@ -46,18 +50,35 @@ for cnt in contours:
 
 	cntList.append((x,y,w,h))
 
+
 	areaDiff = abs(imgW*imgH - (w-x)*(h-y))	
 	
 	if areaDiff > 0.01:
 		cv2.rectangle(img,(x-bInd,y-bInd),(x+w+bInd,y+h+bInd),(0,255,0),2)
+	print ie.getElement(origImg[y-bInd:y+h+bInd, x-bInd:x+w+bInd])
+	
+	if h < imgH/4 and y < imgH/4:
+		# Located at the top
+		print 'Located on top'	
+	elif h > imgH - (imgH/5) and y > imgH - (imgH/5):
+		# Located at the bottom
+		print 'Located on bottom'	
+		
+
+	elif x > imgW-(imgW/5):
+		print 'Located on Right'
+	elif w < imgW/5:
+		print 'Located on Left'
+	elif w > imgW/5 and w < imgW-(imgW/5):
+		print 'Located in Center'
+
+
 	cv2.imshow('test',origImg[y-bInd:y+h+bInd, x-bInd:x+w+bInd])
 	cv2.imwrite('0.png',origImg[y-bInd:y+h+bInd, x-bInd:x+w+bInd])
 	cv2.waitKey(0)
-'''	
-drawnCnt = origImg.copy()
-cv2.drawContours(drawnCnt, contours, -1, (0,255,0), 3)
-cv2.imshow('cnt',drawnCnt)
-'''
+
+	print '\n\n\n\n'
+
 cv2.imshow('s',thresh)
 cv2.imshow('test',img)
 cv2.waitKey(0)
