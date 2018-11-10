@@ -4,9 +4,9 @@
 import cv2 
 import numpy as np 
 
-#img = cv2.imread('shapes/vertical.png') 
+img = cv2.imread('shapes/vertical.png') 
 #img = cv2.imread('shapes/horizontal.png') 
-img = cv2.imread('shapes/l.png') 
+#img = cv2.imread('shapes/l.png') 
   
 # Convert the img to grayscale 
 gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY) 

@@ -3,9 +3,7 @@ import imutils
 
 bInd = 15
 
-#img = cv2.imread('1.jpg')
-#img = cv2.imread('2.jpg')
-img = cv2.imread('web0.jpg')
+img = cv2.imread('test/web0.jpg')
 
 cntList = []
 

@@ -2,9 +2,10 @@ import cv2
 
 minSize = 500
 
-#img = cv2.imread('shapes/i.png')         
-img = cv2.imread('shapes/hourglass.png')         
-#img = cv2.imread('shapes/tri.png')         
+#img = cv2.imread('shapes/i1.png')         
+#img = cv2.imread('shapes/hourglass1.png')         
+img = cv2.imread('shapes/tri1.png')         
+img = cv2.imread('shapes/x1.png')         
 
 # Convert the img to grayscale 
 imgray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
@@ -14,7 +15,7 @@ edges = cv2.Canny(imgray,50,150,apertureSize = 3)
 #thresh = cv2.adaptiveThreshold(imgray,255,cv2.ADAPTIVE_THRESH_GAUSSIAN_C,cv2.THRESH_BINARY,11,2)
 thresh = edges
 im2, contours, hierarchy = cv2.findContours(thresh,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
-
+print len(contours)
 contours = sorted(contours, key = cv2.contourArea, reverse = True)[:1]
 
 for cnt in contours:
