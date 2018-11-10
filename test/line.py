@@ -3,13 +3,11 @@
 # method for line detection 
 import cv2 
 import numpy as np 
-  
-# Reading the required image in  
-# which operations are to be done.  
-# Make sure that the image is in the same  
-# directory in which this python program is 
+
 #img = cv2.imread('shapes/vertical.png') 
-img = cv2.imread('shapes/horizontal.png') 
+#img = cv2.imread('shapes/horizontal.png') 
+img = cv2.imread('shapes/horizontal1.png') 
+#img = cv2.imread('shapes/l.png') 
   
 # Convert the img to grayscale 
 gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY) 
