@@ -6,13 +6,12 @@ minSize = 500
 def isCircle(img):
 	#cv2.imshow('s',img)
 	#cv2.waitKey(0)
-	try:
-		circles = cv2.HoughCircles(img,cv2.HOUGH_GRADIENT,1,20,param1=50,param2=30,minRadius=0,maxRadius=0)
-	except:
-		return False
-	if len(circles) > 0:
+	#img = cv2.cvtColor(img,cv2.COLOR_GRAY2BGR)	
+	img = cv2.medianBlur(img,5)	
+	circles = cv2.HoughCircles(img,cv2.HOUGH_GRADIENT,1,20,param1=70,param2=50,minRadius=50,maxRadius=300)
+	if circles is not None:
 		return True
-	circles = np.uint16(np.around(circles))
+	
 	return False
 
 def countLines(edges, img):
@@ -51,7 +50,7 @@ def countLines(edges, img):
 
 
 def getElement(img):
-	imgray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
+	imgray = img
 	# Apply edge detection method on the image 
 	edges = cv2.Canny(imgray,50,150,apertureSize = 3)
 	
@@ -98,7 +97,7 @@ def getElement(img):
 		hullArea = cv2.contourArea(hull)
 		solidity = area/float(hullArea)
 
-		cv2.rectangle(img,(x,y),(x+w,y+h),(0,255,0),2)
+		#cv2.rectangle(img,(x,y),(x+w,y+h),(0,255,0),2)
 		'''	
 		print 'area: ', area
 		print 'aspect ratio: ', aspectRatio

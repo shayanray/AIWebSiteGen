@@ -1,12 +1,18 @@
 import numpy as np
 import cv2 as cv
 #img = cv.imread('shapes/circle.png',0)
-img = cv.imread('shapes/tri1.png',0)
+img = cv.imread('shapes/circle1.png',0)
+#img = cv.imread('shapes/tri1.png',0)
 #img = cv.imread('shapes/1.jpg',0)
+#img = cv.imread('shapes/i.png')
 img = cv.medianBlur(img,5)
-cimg = cv.cvtColor(img,cv.COLOR_GRAY2BGR)
-circles = cv.HoughCircles(img,cv.HOUGH_GRADIENT,1,20,
-                            param1=50,param2=30,minRadius=0,maxRadius=0)
+img = cv.cvtColor(img,cv.COLOR_BGR2GRAY)
+#circles = cv.HoughCircles(img,cv.HOUGH_GRADIENT,1,20,param1=200,param2=70,minRadius=50,maxRadius=300)
+circles = cv.HoughCircles(img,cv.HOUGH_GRADIENT,1,20,param1=70,param2=50,minRadius=50,maxRadius=300)
+if circles is None:
+	print 'No circles detected'
+	exit()
+
 circles = np.uint16(np.around(circles))
 for i in circles[0,:]:
     # draw the outer circle
