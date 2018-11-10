@@ -56,23 +56,23 @@ for cnt in contours:
 	if areaDiff > 0.01:
 		cv2.rectangle(img,(x-bInd,y-bInd),(x+w+bInd,y+h+bInd),(0,255,0),2)
 	print ie.getElement(origImg[y-bInd:y+h+bInd, x-bInd:x+w+bInd])
-	
+
+	pos = None	
 	if h < imgH/4 and y < imgH/4:
 		# Located at the top
-		print 'Located on top'	
+		pos = 'top'
 	elif h > imgH - (imgH/5) and y > imgH - (imgH/5):
 		# Located at the bottom
-		print 'Located on bottom'	
-		
+		pos = 'bottom'
 
 	elif x > imgW-(imgW/5):
-		print 'Located on Right'
+		pos = 'right'
 	elif w < imgW/5:
-		print 'Located on Left'
+		pos = 'left'
 	elif w > imgW/5 and w < imgW-(imgW/5):
-		print 'Located in Center'
+		pos = 'center'
 
-
+	print 'Located on ' + pos
 	cv2.imshow('test',origImg[y-bInd:y+h+bInd, x-bInd:x+w+bInd])
 	cv2.imwrite('0.png',origImg[y-bInd:y+h+bInd, x-bInd:x+w+bInd])
 	cv2.waitKey(0)
