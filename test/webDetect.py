@@ -17,6 +17,18 @@ def insideExistingBox(cnt):
 
 	return False
 
+def translateElement(element):
+	if element.upper() == 'X':
+		return "commentSys"
+	elif element == 'triangle':
+		return "loginBut"
+	elif element == 'circle':
+		return "APIBut"
+	elif element.upper() == 'I':
+		return "personalInfo"
+
+	return None
+
 def main():
 	#imgPath = 'web0.jpg'	
 	imgPath = 'web1.jpg'	
@@ -45,6 +57,8 @@ def main():
 
 	contours = sorted(contours, key = cv2.contourArea, reverse = True)[:20]
 
+
+	jsonStr = '"position":{\n'
 	elementList = []
 	for cnt in contours:
 		area = cv2.contourArea(cnt)
@@ -63,15 +77,14 @@ def main():
 		if areaDiff > 0.01:
 			cv2.rectangle(resImg,(x-bInd,y-bInd),(x+w+bInd,y+h+bInd),(0,255,0),2)
 		element = ie.getElement(origImg[y-bInd:y+h+bInd, x-bInd:x+w+bInd])
-		print element
 
 		pos = None	
 		if h < imgH/4 and y < imgH/4:
 			# Located at the top
-			pos = 'top'
+			pos = 'top-center'
 		elif h > imgH - (imgH/5) and y > imgH - (imgH/5):
 			# Located at the bottom
-			pos = 'bottom'
+			pos = 'bottom-center'
 
 		elif x > imgW-(imgW/5):
 			pos = 'right'
@@ -80,20 +93,38 @@ def main():
 		elif w > imgW/5 and w < imgW-(imgW/5):
 			pos = 'center'
 
+				
+		if translateElement(element) is not None:
+			element = translateElement(element)
+			jsonStr += '"'+element+'": "'+pos+'",\n'
+		else:	
+			jsonStr += '"'+element+'": "'+pos+'",\n'
+
+		elementList.append((element, pos))
+
+
+		print element
 		print 'Located on ' + pos
+
+
 		cv2.imshow('test',origImg[y-bInd:y+h+bInd, x-bInd:x+w+bInd])
 		cv2.imwrite('0.png',origImg[y-bInd:y+h+bInd, x-bInd:x+w+bInd])
 		cv2.waitKey(0)
 
 		print '\n\n\n\n'
-		elementList.append((element, pos))
+	jsonStr = jsonStr.replace(jsonStr[len(jsonStr)-2], '')
+	
+	#print elementList
+	jsonStr += "}"
 
-	print elementList
+	print jsonStr
 
 	cv2.imshow('s',thresh)
 	cv2.imshow('test',resImg)
 	cv2.waitKey(0)
-	return elementList
+	
+
+	return jsonStr
 
 if __name__ == "__main__":
 	main()
