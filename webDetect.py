@@ -23,15 +23,15 @@ def translateElement(element):
 	elif element == 'triangle':
 		return "share"
 	elif element == 'circle':
-		return "APIBut"
+		return "share"
 	elif element.upper() == 'I':
-		return "image"
+		return "images"
 
 	return None
 
-def runDetector():
-	imgPath = 'test/web0.jpg'	
-	imgPath = 'test/web1.jpg'	
+def runDetector(imgPath):
+	#imgPath = 'uploaded/web0.jpg'	
+	#imgPath = 'uploaded/web1.jpg'	
 
 	#img = cv2.imread('1.jpg')
 	#img = cv2.imread('2.jpg')
@@ -59,7 +59,7 @@ def runDetector():
 	contours = sorted(contours, key = cv2.contourArea, reverse = True)[:20]
 
 
-	jsonStr = '"position":{\n'
+	jsonStr = '{"position":{'
 	elementList = []
 	for cnt in contours:
 		area = cv2.contourArea(cnt)
@@ -82,7 +82,7 @@ def runDetector():
 		pos = None	
 		if h < imgH/4 and y < imgH/4:
 			# Located at the top
-			pos = 'top-center'
+			pos = 'top'
 		elif h > imgH - (imgH/5) and y > imgH - (imgH/5):
 			# Located at the bottom
 			pos = 'bottom-center'
@@ -97,9 +97,9 @@ def runDetector():
 		if element is not None and pos is not None:			
 			if translateElement(element) is not None:
 				element = translateElement(element)
-				jsonStr += '"'+element+'": "'+pos+'",\n'
+				jsonStr += '"'+element+'": "'+pos+'",'
 			else:	
-				jsonStr += '"'+element+'": "'+pos+'",\n'
+				jsonStr += '"'+element+'": "'+pos+'",'
 
 			elementList.append((element, pos))
 
@@ -113,12 +113,15 @@ def runDetector():
 			#cv2.waitKey(0)
 
 			print '\n\n\n\n'
-	jsonStr = jsonStr.replace(jsonStr[len(jsonStr)-2], '')
+	print "photojson before ******************** ",jsonStr
+	k = jsonStr.rfind(",")
+	jsonStr = jsonStr[:k] +  jsonStr[k+1:]
+	#jsonStr = jsonStr.replace(jsonStr[len(jsonStr)-2], '')
 	
 	#print elementList
-	jsonStr += "}"
+	jsonStr += "}}"
 
-	print jsonStr
+	print "photojson ******************** ",jsonStr
 
 	#cv2.imshow('s',thresh)
 	#cv2.imshow('test',resImg)
@@ -132,4 +135,4 @@ if __name__ == "__main__":
 '''
 
 
-runDetector()
+#runDetector()
