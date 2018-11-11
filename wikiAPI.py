@@ -37,7 +37,7 @@ def getContent(name):
 		endIndex = whole.index("\n", startIndex)
 		temp = whole[startIndex: endIndex]
 		temp = temp.replace("'", "")
-       		temp = temp.replace("\"", "")
+		temp = temp.replace("\"", "")
 		keyvalue = {}
 		if len(temp) > 40:
 			keyvalue["title"] = temp[0:40] + "..."

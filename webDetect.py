@@ -108,9 +108,9 @@ def runDetector():
 			print 'Located on ' + pos
 
 
-			cv2.imshow('test',origImg[y-bInd:y+h+bInd, x-bInd:x+w+bInd])
-			cv2.imwrite('0.png',origImg[y-bInd:y+h+bInd, x-bInd:x+w+bInd])
-			cv2.waitKey(0)
+			#cv2.imshow('test',origImg[y-bInd:y+h+bInd, x-bInd:x+w+bInd])
+			#cv2.imwrite('0.png',origImg[y-bInd:y+h+bInd, x-bInd:x+w+bInd])
+			#cv2.waitKey(0)
 
 			print '\n\n\n\n'
 	jsonStr = jsonStr.replace(jsonStr[len(jsonStr)-2], '')
@@ -121,8 +121,8 @@ def runDetector():
 	print jsonStr
 
 	#cv2.imshow('s',thresh)
-	cv2.imshow('test',resImg)
-	cv2.waitKey(0)
+	#cv2.imshow('test',resImg)
+	#cv2.waitKey(0)
 	
 
 	return jsonStr
