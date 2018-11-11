@@ -36,7 +36,8 @@ def submit():
     else:
         myFile = None
 
-    return topic
+    #url_for('success',name = user)
+    return redirect("https://aiwebsitegen.lib.id/Test@dev/?jsonip=test")
 
 
 def callWebScraper(topic):
