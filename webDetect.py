@@ -2,7 +2,7 @@ import cv2
 import imutils
 import identifyElement as ie
 
-bInd = 15
+bInd = 5
 
 
 cntList = []
@@ -19,19 +19,19 @@ def insideExistingBox(cnt):
 
 def translateElement(element):
 	if element.upper() == 'X':
-		return "commentSys"
+		return "personalInfo"
 	elif element == 'triangle':
-		return "loginBut"
+		return "share"
 	elif element == 'circle':
 		return "APIBut"
 	elif element.upper() == 'I':
-		return "personalInfo"
+		return "image"
 
 	return None
 
 def main():
-	imgPath = 'test/web0.jpg'	
-	#imgPath = 'test/web1.jpg'	
+	#imgPath = 'test/web0.jpg'	
+	imgPath = 'test/web1.jpg'	
 
 	#img = cv2.imread('1.jpg')
 	#img = cv2.imread('2.jpg')
@@ -86,32 +86,32 @@ def main():
 			# Located at the bottom
 			pos = 'bottom-center'
 
-		elif x > imgW-(imgW/5):
+		elif x > imgW-(imgW/4):
 			pos = 'right'
-		elif w < imgW/5:
+		elif w < imgW/4:
 			pos = 'left'
-		elif w > imgW/5 and w < imgW-(imgW/5):
+		elif w > imgW/4 and w < imgW-(imgW/5):
 			pos = 'center'
 
-				
-		if translateElement(element) is not None:
-			element = translateElement(element)
-			jsonStr += '"'+element+'": "'+pos+'",\n'
-		else:	
-			jsonStr += '"'+element+'": "'+pos+'",\n'
+		if element is not None and pos is not None:			
+			if translateElement(element) is not None:
+				element = translateElement(element)
+				jsonStr += '"'+element+'": "'+pos+'",\n'
+			else:	
+				jsonStr += '"'+element+'": "'+pos+'",\n'
 
-		elementList.append((element, pos))
-
-
-		print element
-		print 'Located on ' + pos
+			elementList.append((element, pos))
 
 
-		cv2.imshow('test',origImg[y-bInd:y+h+bInd, x-bInd:x+w+bInd])
-		cv2.imwrite('0.png',origImg[y-bInd:y+h+bInd, x-bInd:x+w+bInd])
-		cv2.waitKey(0)
+			print element
+			print 'Located on ' + pos
 
-		print '\n\n\n\n'
+
+			cv2.imshow('test',origImg[y-bInd:y+h+bInd, x-bInd:x+w+bInd])
+			cv2.imwrite('0.png',origImg[y-bInd:y+h+bInd, x-bInd:x+w+bInd])
+			cv2.waitKey(0)
+
+			print '\n\n\n\n'
 	jsonStr = jsonStr.replace(jsonStr[len(jsonStr)-2], '')
 	
 	#print elementList
@@ -119,7 +119,7 @@ def main():
 
 	print jsonStr
 
-	cv2.imshow('s',thresh)
+	#cv2.imshow('s',thresh)
 	cv2.imshow('test',resImg)
 	cv2.waitKey(0)
 	
