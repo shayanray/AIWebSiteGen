@@ -50,7 +50,7 @@ def submit():
     encodedurl =  _byteify(urllib.urlencode(final)) #resultJSON
     #encodedurl = urllib.unquote_plus(encodedurl)
     print("encodedurl JSON ....................... ",encodedurl) 
-    urlai = "https://aiwebsitegen.lib.id/Test@0.0.4/?"
+    urlai = "https://aiwebsitegen.lib.id/Test@0.0.3/?"
     print("\n\n\n"+urlai+encodedurl)
     return redirect(urlai+encodedurl ) #,code=307
     #res = requests.post(urlai, json=resultJSON)

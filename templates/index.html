@@ -10,8 +10,7 @@
                 <meta name="description" content="Source code generated using layoutit.com">
                 <meta name="author" content="LayoutIt!">
 
-
-                <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+                 <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
                 <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" >
 
         </head>
@@ -61,6 +60,13 @@ to it.
 div.jumbotron{
         border-style: double;
 }
+
+body {
+        margin-right: 20%;
+        margin-left: 20%;
+        margin-top: 5%;
+        margin-bottom: 10%;
+}
                 </style>
 
                 <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
@@ -71,19 +77,15 @@ div.jumbotron{
                                 var preview = document.querySelector('img'); //selects the query named img
                                 var file    = document.querySelector('input[type=file]').files[0]; //sames as here
                                 var reader  = new FileReader();
-
-
                                 reader.onloadend = function () {
                                         preview.src = reader.result;
                                 }
-
                                 if (file) {
                                         reader.readAsDataURL(file); //reads the data as a URL
                                 } else {
                                         preview.src = "";
                                 }
                         }
-
 previewFile();  //calls the function named previewFile()
                 </script>
 
