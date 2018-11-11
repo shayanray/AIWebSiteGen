@@ -25,7 +25,7 @@ def getContent(name):
 	data = json.loads(response.read())
 
 	for i in data["query"]["pages"]:
-		id = i
+		id0 = i
 		break
 	
 	whole = page.content
@@ -33,20 +33,25 @@ def getContent(name):
 	startIndex = whole.index("External links") + 18
 
 	urlList = []
-	for link in data["query"]["pages"][id]["extlinks"]:
-		endIndex = whole.index("\n", startIndex)
-		temp = whole[startIndex: endIndex]
-		temp = temp.replace("'", "")
-		temp = temp.replace("\"", "")
-		keyvalue = {}
-		if len(temp) > 40:
-			keyvalue["title"] = temp[0:40] + "..."
-		else:
-			keyvalue["title"] = temp
-		keyvalue["url"] = "http:" + str(link)[9:len(str(link))-2]
-		urlList.append(keyvalue)
-		startIndex = endIndex + 1
-	
+	for link in data["query"]["pages"][id0]["extlinks"]:
+		print("startIndex >> ", startIndex)
+		try:
+			endIndex = whole.index("\n", startIndex)
+		except:
+			continue
+		if endIndex:
+			temp = whole[startIndex: endIndex]
+			temp = temp.replace("'", "")
+			temp = temp.replace("\"", "")
+			keyvalue = {}
+			if len(temp) > 40:
+				keyvalue["title"] = temp[0:40] + "..."
+			else:
+				keyvalue["title"] = temp
+			keyvalue["url"] = "http:" + str(link)[9:len(str(link))-2]
+			urlList.append(keyvalue)
+			startIndex = endIndex + 1
+		
 	
 	shareList= ["http://chittagongit.com//images/facebook-share-icon-png/facebook-share-icon-png-9.jpg", "https://www.green-marine.org/wp-content/uploads/2015/08/Twitter_logo-325x325.png"]
 	output["refurls"] = urlList
