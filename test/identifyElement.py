@@ -58,9 +58,9 @@ def getElement(img):
 
 	if linePos is not None:
 		if linePos == 'horizontal':
-			return 'Main text content'
+			return 'mainContent'
 		elif linePos == 'vertical':
-			return 'Navigation Bar'
+			return 'navBar'
 
 	#thresh = cv2.adaptiveThreshold(imgray,255,cv2.ADAPTIVE_THRESH_GAUSSIAN_C,cv2.THRESH_BINARY,11,2)
 	thresh = edges
