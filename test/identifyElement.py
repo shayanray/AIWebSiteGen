@@ -19,7 +19,7 @@ def countLines(edges, img):
 	maxLineGap = 10
 	lines = cv2.HoughLinesP(edges,1,np.pi/180,15,minLineLength,maxLineGap)
 	
-	if len(lines) < 100:
+	if lines is None or len(lines) < 100:
 		return None
 
 	# The below for loop runs till r and theta values  
@@ -39,11 +39,16 @@ def countLines(edges, img):
 			#print 'Horizontal'
 
 		#cv2.line(img,(x1,y1),(x2,y2),(0,255,0),2)
-	
-	#print 'vert: ', vertCnt
-	#print 'horCnt: ', horCnt
-	#cv2.imshow('test',img)
-	#cv2.waitKey(0)
+	'''	
+	print 'vert: ', vertCnt
+	print 'horCnt: ', horCnt
+	cv2.imshow('test',img)
+	cv2.waitKey(0)
+	'''
+	if horCnt < 110:
+		return 'vertical'
+
+
 	if vertCnt > horCnt:
 		return 'vertical'
 	return 'horizontal'
@@ -108,9 +113,9 @@ def getElement(img):
 		if isCircle(img):
 			return 'circle'
 		
-		if solidity < 0.05 and extent < 0.1:
+		if solidity < 0.2 and extent < 0.2:
 			return 'I'
-		elif solidity < 0.2:
+		elif solidity < 0.4:
 			return 'triangle'
 		elif solidity < 0.6:
 			return 'X'
@@ -118,14 +123,6 @@ def getElement(img):
 			return 'triangle'
 		else:
 			return 'Unknown'
-		'''
-		hullDr = []
-		for i in range(len(contours)):
-		    # creating convex hull object for each contour
-		    hullDr.append(cv2.convexHull(cnt[i], False))
 
-		cv2.drawContours(img, cnt, -1,(0,0,255),-1)
-		cv2.drawContours(img, hullDr, -1,(255,0,0),-1)
-		'''
-
-	return 'Undefined'
+	return 'I'
+	#return 'Undefined'
