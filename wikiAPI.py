@@ -48,7 +48,9 @@ def getContent(name):
 		startIndex = endIndex + 1
 	
 	
+	shareList= ["http://chittagongit.com//images/facebook-share-icon-png/facebook-share-icon-png-9.jpg", "https://www.green-marine.org/wp-content/uploads/2015/08/Twitter_logo-325x325.png"]
 	output["refurls"] = urlList
+	output["share"] = shareList
 	output["footer"] = "All Rights Reserved."
 	
 	scraper["content"] = output	
