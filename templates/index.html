@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+        <head>
+                <meta charset="utf-8">
+                <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                <meta name="viewport" content="width=device-width, initial-scale=1">
+
+                <title>Website Generator</title>
+
+                <meta name="description" content="Source code generated using layoutit.com">
+                <meta name="author" content="LayoutIt!">
+
+
+                <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+                <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" >
+
+        </head>
+        <body>
+
+                <div class="container-fluid">
+                        <div class="row">
+                                <div class="col-md-12">
+                                        <div class="jumbotron" >
+                                                <h2>
+                                                        Hello, world!
+                                                </h2>
+                                                <p>
+                                                Have you ever wanted to build a website, but with a design of your own invention and without ever generating the content you
+rself?
+                                                Upload a picture with a drawing of your dream template, and type in the topic of the website to generate content pertaining
+to it.
+                                                </p>
+
+                                                <form action="/submit" method="post" enctype=multipart/form-data>
+                                                        <div class="form-group">
+                                                                <img src="" height="200" alt="Image preview...">
+                                                                <label for="exampleFormControlFile1">Enter your drawing here--make sure it's on blank paper!</label>
+                                                                <input type="file" class="form-control-file" onchange='previewFile()' id="myFile" name="myFile">
+                                                        </div>
+
+                                                        <div class="form-group form-check">   <label for="exampleInputEmail1">What topic do you want your website to cover?</label>
+                                                                <input type="topic" class="form-control" name="topic" aria-describedby="topicHelp" placeholder="Enter topic"
+>
+                                                        </div>
+                                                        <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
+                                                        <button type="reset" class="btn btn-secondary">Reset</button>
+                                                </form>
+                                                </p>
+
+                                        </div>
+
+
+
+
+                                        <a class="btn btn-primary btn-large" href="#">Make my dream website!</a>
+                                </div>
+                        </div>
+                </div>
+
+                <style>
+div.jumbotron{
+        border-style: double;
+}
+                </style>
+
+                <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+                <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+                <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+                <script>
+                        function previewFile(){
+                                var preview = document.querySelector('img'); //selects the query named img
+                                var file    = document.querySelector('input[type=file]').files[0]; //sames as here
+                                var reader  = new FileReader();
+
+
+                                reader.onloadend = function () {
+                                        preview.src = reader.result;
+                                }
+
+                                if (file) {
+                                        reader.readAsDataURL(file); //reads the data as a URL
+                                } else {
+                                        preview.src = "";
+                                }
+                        }
+
+previewFile();  //calls the function named previewFile()
+                </script>
+
+        </body>
+</html>
