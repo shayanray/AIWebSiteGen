@@ -85,17 +85,32 @@ def search_list_by_keyword(client, **kwargs):
     **kwargs
   ).execute()
 
-  return print_response(response)
+  #return print_response(response)
+  return response
 
 
-if __name__ == '__main__':
+def doesNotMatter(inputYT):
   # When running locally, disable OAuthlib's HTTPs verification. When
   # running in production *do not* leave this option enabled.
   os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
   client = get_authenticated_service()
   
-  search_list_by_keyword(client,
+  
+
+  test = search_list_by_keyword(client,
     part='snippet',
     maxResults=1,
-    q='surfing',
+    q=inputYT,
     type='')
+  
+  test = str(test)
+  index = test.index("u'videoId': u'")
+  endIndex = test.index("'", index + 15)
+  id = test.substring(index+15, endIndex + 1)
+
+  return id;  
+
+
+
+  
+

@@ -27,11 +27,27 @@ def getContent(name):
 	for i in data["query"]["pages"]:
 		id = i
 		break
+	
+	whole = page.content
+	whole = whole.encode('ascii','ignore') 
+	startIndex = whole.index("External links") + 18
 
 	urlList = []
 	for link in data["query"]["pages"][id]["extlinks"]:
-		urlList.append("http:" + str(link)[9:len(str(link))-2])
-
+		endIndex = whole.index("\n", startIndex)
+		temp = whole[startIndex: endIndex]
+		temp = temp.replace("'", "")
+       		temp = temp.replace("\"", "")
+		keyvalue = {}
+		if len(temp) > 40:
+			keyvalue["title"] = temp[0:40] + "..."
+		else:
+			keyvalue["title"] = temp
+		keyvalue["url"] = "http:" + str(link)[9:len(str(link))-2]
+		urlList.append(keyvalue)
+		startIndex = endIndex + 1
+	
+	
 	output["refurls"] = urlList
 	output["footer"] = "All Rights Reserved."
 	
@@ -40,5 +56,5 @@ def getContent(name):
 	scraperJson = json.dumps(scraper)
 
 	return scraperJson
-
-
+	
+	
