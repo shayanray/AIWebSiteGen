@@ -1,0 +1,13 @@
+{
+  "name": "aiwebsitegen/test",
+  "version": "0.0.10",
+  "author": "AIWebSiteGen",
+  "stdlib": {
+    "name": "aiwebsitegen/test",
+    "timeout": 10000
+  },
+  "dependencies": {
+    "mime": "^2.3.1",
+    "ejs": "^2.6.1"
+  }
+}

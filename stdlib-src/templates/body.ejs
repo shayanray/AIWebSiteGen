@@ -1,0 +1,53 @@
+<body>
+
+<%- include('top') %>
+<div style="background-color:gray;">
+  <br><br><br>
+    <center>
+    <div class="roundedImage">&nbsp;</div>
+    </center>
+    <br><br><br>
+    </div>
+<div class="container-fluid text-center">    
+  <div class="row content">
+   
+    <%- include('left-navbar') %>
+    
+    <div class="col-sm-8 text-left" style="padding:20px;left-margin:20px;right-margin:20px;"> 
+      
+      <h1><center><%= contentheader %></center></h1>
+      
+      
+      <p><%= contentmaincontent  %></p>
+      
+      
+      
+      <hr>
+      <center>
+      <br><br>
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/CrrSAc-vjG4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <br><br>
+      </center>
+    </div>
+    
+    <%- include('right-navbar') %>
+    
+    
+  </div>
+</div>
+<style>
+.roundedImage {
+    background: url(<%= contentimages[0]%>);
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin-left: auto;
+    margin-right: auto;
+    overflow:hidden;
+    -webkit-border-radius:10px;
+    -moz-border-radius:10px;
+    border-radius:100px;
+    width:150px;
+    height:150px;
+}
+</style>
+</body>

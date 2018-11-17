@@ -1,0 +1,21 @@
+<%if ( positionimages == "right") { %>
+<div class="col-sm-2 sidenav"  style="height:1000px;">
+   <% contentimages.forEach(function(img) { %>
+	<p><img height=80 width=100 title=<%= img.substring(img.lastIndexOf("/") + 1, img.lastIndexOf("."));%> src=<%= img %>></img>
+	</p>
+	 <% }); %>
+
+</div>
+
+<% } if ( positionshare == "right"){ %>
+<div class="col-sm-2 sidenav" style="height:%100;"  style="height:1000px;">
+   <% contentshare.forEach(function(img) { %>
+	<p><img height=80 width=80 title= <%= img.substring(img.lastIndexOf("/") + 1, img.lastIndexOf(".")); %> src=<%= img %>> </img>
+	</p>
+	 <% }); %>
+ 
+</div>
+
+<% } %>
+
+
